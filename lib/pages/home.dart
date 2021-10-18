@@ -14,10 +14,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
 
 
-    String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';
+    String bgImage = data['isDay'] ? 'day.png' : 'night.png';
 
     return Scaffold(
       backgroundColor: Colors.grey[800],
@@ -40,6 +40,9 @@ class _HomeState extends State<Home> {
                     // backgroundColor: Colors.grey[50],
                     backgroundImage: AssetImage('assets/'+data['flag']+'.png'),
                     radius: 20.0,
+                  ),
+                  SizedBox(
+                    width: 10.0,
                   ),
                   Text(
                     data['location'],
@@ -69,7 +72,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 100.0,
               ),
-              TextButton.icon(
+              ElevatedButton.icon(
                 icon: Icon(
                   Icons.edit_location,
                   color: Colors.grey[50],
@@ -95,6 +98,9 @@ class _HomeState extends State<Home> {
                     });
                   }
                 },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.grey[900]),
+                ),
               ),
             ],
           ),
